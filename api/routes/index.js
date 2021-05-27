@@ -1,6 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const jwt = require('express-jwt')
+const
+    express = require('express'),
+    router = express.Router(),
+    jwt = require('express-jwt')
 //var auth = jwt({
 //  secret: process.env.secret,
 //  userProperty: 'payload'
@@ -8,12 +9,15 @@ const jwt = require('express-jwt')
 
 //var ctrlProfile = require('../controllers/profile');
 //var ctrlAuth = require('../controllers/authentication');
-const ctrlNews = require('../controllers/newshandling')
-const ctrlActivities = require('../controllers/activitieshandling')
-const ctrlSelective = require('../controllers/selectivehandling')
-const ctrlResult = require('../controllers/resulthandling')
-const ctrlIntro = require('../controllers/introhandling')
-const ctrlCalendar = require('../controllers/calendarhandling')
+const
+    ctrlNews = require('../controllers/newshandling'),
+    ctrlActivities = require('../controllers/activitieshandling'),
+    ctrlSelective = require('../controllers/selectivehandling'),
+    ctrlResult = require('../controllers/resulthandling'),
+    ctrlIntro = require('../controllers/introhandling'),
+    ctrlCalendar = require('../controllers/calendarhandling'),
+    ctrlForms = require('../controllers/clientform'),
+    ctrlDistricts = require('../controllers/districthandling')
 //const ctrlStream = require('../controllers/stream')
 
 
@@ -21,6 +25,7 @@ const ctrlCalendar = require('../controllers/calendarhandling')
 router.get('/news', ctrlNews.sendNews)
 router.get('/archives', ctrlNews.sendArchive)
 router.post('/upload', ctrlNews.Addnews)
+router.post('/userform', ctrlForms.sendClientForm)
 
 router.get('/intro', ctrlIntro.sendIntro)
 router.get('/activities', ctrlActivities.sendActivities)
@@ -35,7 +40,8 @@ router.get('/cal', ctrlCalendar.saveCal)
 router.get('/cal-zeg-single', ctrlCalendar.calZegSingle)
 router.get('/cal-zeg-multi', ctrlCalendar.calZegMulti)
 router.get('/cal-videk', ctrlCalendar.calVidek)
-router.get('/results', ctrlResult.retrieveTop);
+router.get('/results', ctrlResult.retrieveTop)
+router.get('/districts', ctrlDistricts.sendDistricts)
 //router.post('/result', ctrlResult.retrieveOwn);
 //router.post('/signup', ctrlAuth.register);
 //router.post('/signin', ctrlAuth.login);
