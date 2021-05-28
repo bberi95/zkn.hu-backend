@@ -17,7 +17,8 @@ const
     ctrlIntro = require('../controllers/introhandling'),
     ctrlCalendar = require('../controllers/calendarhandling'),
     ctrlForms = require('../controllers/clientform'),
-    ctrlDistricts = require('../controllers/districthandling')
+    ctrlStreets = require('../controllers/streethandling'),
+    ctrlGarbages = require('../controllers/garbagehangling')
 //const ctrlStream = require('../controllers/stream')
 
 
@@ -41,7 +42,11 @@ router.get('/cal-zeg-single', ctrlCalendar.calZegSingle)
 router.get('/cal-zeg-multi', ctrlCalendar.calZegMulti)
 router.get('/cal-videk', ctrlCalendar.calVidek)
 router.get('/results', ctrlResult.retrieveTop)
-router.get('/districts', ctrlDistricts.sendDistricts)
+router.post('/streets', ctrlStreets.sendStreets)
+router.get('/areas', ctrlStreets.sendAreas)
+router.get('/garbages', ctrlGarbages.sendGarbages)
+
+
 //router.post('/result', ctrlResult.retrieveOwn);
 //router.post('/signup', ctrlAuth.register);
 //router.post('/signin', ctrlAuth.login);
