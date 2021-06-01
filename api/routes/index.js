@@ -18,7 +18,8 @@ const
     ctrlCalendar = require('../controllers/calendarhandling'),
     ctrlForms = require('../controllers/clientform'),
     ctrlStreets = require('../controllers/streethandling'),
-    ctrlGarbages = require('../controllers/garbagehangling')
+    ctrlGarbages = require('../controllers/garbagehandling'),
+    ctrlRequests = require('../controllers/requestshandling')
 //const ctrlStream = require('../controllers/stream')
 
 
@@ -45,6 +46,7 @@ router.get('/results', ctrlResult.retrieveTop)
 router.post('/streets', ctrlStreets.sendStreets)
 router.get('/areas', ctrlStreets.sendAreas)
 router.get('/garbages', ctrlGarbages.sendGarbages)
+router.post('/requests', ctrlRequests.saveRequests)
 
 
 //router.post('/result', ctrlResult.retrieveOwn);
