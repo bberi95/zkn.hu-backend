@@ -9,6 +9,10 @@ var garbageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    completed: {
+        type: Boolean,
+        required: true
+    },
     class: {
         type: String,
         required: true
