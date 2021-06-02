@@ -16,8 +16,8 @@ module.exports.updateIntro = function (req, res) {
 
 
     const introData = req.body,
-        filter = { id: 0 },
-        updated = { $set: { id: 0, text: introData.text, date: new Date(), sign: introData.sign, rank: introData.rank } },
+        filter = { id: introData.id },
+        updated = { $set: { id: introData.id, title: introData.title, text: introData.text, date: introData.date , sign: introData.sign, rank: introData.rank } },
         options = { upsert: true }
 
     Intro.updateOne(filter, updated, options, err => {
