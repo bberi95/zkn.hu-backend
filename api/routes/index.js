@@ -47,7 +47,7 @@ router.post('/streets', ctrlStreets.sendStreets)
 router.get('/areas', ctrlStreets.sendAreas)
 router.get('/garbages', ctrlGarbages.sendGarbages)
 router.post('/requests', ctrlRequests.saveRequests)
-
+router.get('/requests', ctrlRequests.sendRequests)
 
 //router.post('/result', ctrlResult.retrieveOwn);
 //router.post('/signup', ctrlAuth.register);

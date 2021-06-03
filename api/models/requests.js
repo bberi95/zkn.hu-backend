@@ -29,7 +29,7 @@ var requestSchema = new mongoose.Schema({
         required: true,
         readonly: true
     },
-    disctrict: {
+    district: {
         type: String,
         required: true,
         readonly: true

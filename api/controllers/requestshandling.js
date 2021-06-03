@@ -2,6 +2,16 @@ const
     mongoose = require('mongoose'),
     Request = mongoose.model('Request')
 
+module.exports.sendRequests = function (req, res) {
+
+    Request.find({}).sort({ date: -1 }).exec(function (err, result) {
+        if (err) throw err
+        let results = JSON.stringify(result)
+        res.status(200)
+        res.json(results)
+    })
+}
+
 module.exports.saveRequests = function (req, res,) {
 
     setId().then (id =>{
@@ -26,25 +36,6 @@ module.exports.saveRequests = function (req, res,) {
 
 
 };
-
-// async function setId() {
-//     var requestsCount = 1
-//     let dbContent
-//     try {
-//         dbContent = await Request.find()
-//     } catch (err) {
-//         console.log(err.message)
-//     }
-//     dbContent.forEach(elem =>{
-//         requestsCount++
-//     })
-//     // if (requestsCount < 10) {
-//     //     id = '0' + requestsCount
-//     // } else {
-//     //     //...
-//     // }
-//     return requestsCount
-// }
 
 async function setId() {
 
