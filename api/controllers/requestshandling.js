@@ -4,13 +4,46 @@ const
 
 module.exports.sendRequests = function (req, res) {
 
-    Request.find({}).sort({ date: -1 }).exec(function (err, result) {
+    Request.find({ deleted: false }).sort({ date: -1 }).exec(function (err, result) {
         if (err) throw err
         let results = JSON.stringify(result)
         res.status(200)
         res.json(results)
     })
 }
+
+module.exports.updateRequests = function (req, res) {
+
+    //módosítom a deletedet true-ra, ezzel szűröm az adatokat, mintha törölve lenne
+    console.log(req.body)
+    console.log('anything')
+    const requestData = req.body,
+        filter = { id: requestData.id },
+        updated = { 
+            $set: { 
+                deleted: requestData.deleted,
+                id: requestData.id,
+                date: requestData.date,
+            } },
+        options = { upsert: true }
+
+    Request.updateOne(filter, updated, options, err => {
+        res.status(200);
+        if (err) {
+            console.log(err)
+            res.json({
+                'saved': false,
+                'message': err
+            });
+        } else {
+            res.json({
+                'saved': true,
+                'message': 'deleted'
+            });
+        }
+    });
+
+};
 
 module.exports.saveRequests = function (req, res,) {
 

@@ -14,7 +14,6 @@ module.exports.sendIntro = function (req, res) {
 
 module.exports.updateIntro = function (req, res) {
 
-
     const introData = req.body,
         filter = { id: introData.id },
         updated = { $set: { id: introData.id, title: introData.title, text: introData.text, date: introData.date , sign: introData.sign, rank: introData.rank } },
