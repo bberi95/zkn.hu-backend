@@ -45,10 +45,14 @@ router.get('/cal-videk', ctrlCalendar.calVidek)
 router.get('/results', ctrlResult.retrieveTop)
 router.post('/streets', ctrlStreets.sendStreets)
 router.get('/areas', ctrlStreets.sendAreas)
+router.get('/lom-dates', ctrlStreets.sendAreasWithDates)
 router.get('/garbages', ctrlGarbages.sendGarbages)
 router.post('/requests', ctrlRequests.saveRequests)
 router.get('/requests', ctrlRequests.sendRequests)
 router.post('/updaterequest', ctrlRequests.updateRequests)
+
+//temporary
+router.post('/update-street-dates', ctrlStreets.updateStreets)
 
 //router.post('/result', ctrlResult.retrieveOwn);
 //router.post('/signup', ctrlAuth.register);

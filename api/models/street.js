@@ -13,6 +13,10 @@ var streetSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    lomDate: {
+        type: String,
+        required: true
+    },
     single: {
         type: Number,
         required: true
