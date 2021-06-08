@@ -15,8 +15,6 @@ module.exports.sendRequests = function (req, res) {
 module.exports.updateRequests = function (req, res) {
 
     //módosítom a deletedet true-ra, ezzel szűröm az adatokat, mintha törölve lenne
-    console.log(req.body)
-    console.log('anything')
     const requestData = req.body,
         filter = { id: requestData.id },
         updated = { 
@@ -56,11 +54,13 @@ module.exports.saveRequests = function (req, res,) {
             res.status(200);
             if (err) {
                 res.json({
-                    'Save status': err
+                    'saved': false,
+                    'message': err
                 });
             } else {
                 res.json({
-                    'Save status': 'ok!'
+                    'saved': true,
+                    'message': 'ok'
                 });
             }
         });
@@ -94,6 +94,8 @@ async function setId() {
     let dbContent
     try {
         dbContent = await Request.find({ date: { $gt: new Date(todayForm) } })
+        let test= new Date(todayForm)
+        console.log(test)
     } catch (err) {
         console.log(err.message)
     }
