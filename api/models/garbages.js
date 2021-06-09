@@ -5,20 +5,16 @@ var garbageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    id: {
-        type: String,
+    completed: {
+        type: Boolean,
         required: true
     },
-    completed: {
+    active: {
         type: Boolean,
         required: true
     },
     class: {
         type: String,
-        required: true
-    },
-    index: {
-        type: Number,
         required: true
     }
 });

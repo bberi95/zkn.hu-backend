@@ -47,9 +47,12 @@ router.post('/streets', ctrlStreets.sendStreets)
 router.get('/areas', ctrlStreets.sendAreas)
 router.get('/lom-dates', ctrlStreets.sendAreasWithDates)
 router.get('/garbages', ctrlGarbages.sendGarbages)
+router.get('/active-garbages', ctrlGarbages.sendActiveGarbages)
 router.post('/requests', ctrlRequests.saveRequests)
 router.get('/requests', ctrlRequests.sendRequests)
 router.post('/updaterequest', ctrlRequests.updateRequests)
+router.post('/update-garbage', ctrlGarbages.updateGarbage)
+router.post('/add-garbage', ctrlGarbages.saveGarbage)
 
 //temporary
 router.post('/update-street-dates', ctrlStreets.updateStreets)

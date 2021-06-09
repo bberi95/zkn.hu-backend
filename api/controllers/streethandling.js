@@ -21,10 +21,18 @@ module.exports.sendAreas = function (req, res) {
     })
 }
 
-module.exports.sendAreasWithDates = function (req,res) {
+module.exports.sendAreasWithDates = function (req, res) {
+
     Street.find({}).sort({ area: 1 }).exec(function (err, result) {
         if (err) throw err
-        let results = JSON.stringify(result)
+        let
+            areasAndDates = result
+                .reduce((a, s) => {
+                    a.push({ area: s.area, lomDate: s.lomDate })
+                    return a
+                }, [])
+                .filter((v, i, a) => a.findIndex(t => (t.area === v.area && t.lomDate === v.lomDate)) === i),
+            results = JSON.stringify(areasAndDates)
         res.status(200)
         res.json(results)
     })
