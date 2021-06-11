@@ -44,11 +44,32 @@ module.exports.updateGarbage = function (req, res) {
         } else {
             res.json({
                 'saved': true,
-                'message': 'deleted'
+                'message': 'updated'
             });
         }
     });
 };
+
+module.exports.deleteGarbage = function (req, res) {
+
+    const garbageData = req.body
+
+    Garbage.deleteOne(garbageData, err =>{
+        res.status(200);
+        if (err) {
+            console.log(err)
+            res.json({
+                'saved': false,
+                'message': err
+            });
+        } else {
+            res.json({
+                'saved': true,
+                'message': 'deleted'
+            });
+        }
+    })
+}
 
 module.exports.saveGarbage = function (req, res) {
 

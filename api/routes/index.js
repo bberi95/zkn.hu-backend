@@ -53,6 +53,7 @@ router.get('/requests', ctrlRequests.sendRequests)
 router.post('/updaterequest', ctrlRequests.updateRequests)
 router.post('/update-garbage', ctrlGarbages.updateGarbage)
 router.post('/add-garbage', ctrlGarbages.saveGarbage)
+router.post('/delete-garbage', ctrlGarbages.deleteGarbage)
 
 //temporary
 router.post('/update-street-dates', ctrlStreets.updateStreets)
