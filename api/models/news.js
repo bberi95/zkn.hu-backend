@@ -28,7 +28,11 @@ var newsSchema = new mongoose.Schema({
   pics: {
     type: Array,
     required: true
-  }
+  },
+  active: {
+    type: Boolean,
+    required: true
+  },
 });
 
 mongoose.model('News', newsSchema);

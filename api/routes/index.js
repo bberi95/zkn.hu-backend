@@ -25,6 +25,10 @@ const
 
 
 router.get('/news', ctrlNews.sendNews)
+router.get('/active-news', ctrlNews.sendActiveNews)
+router.post('/update-news', ctrlNews.updateNews)
+router.post('/delete-news', ctrlNews.deleteNews)
+// router.post('/update-news', ctrlNews.updateNews)
 router.get('/archives', ctrlNews.sendArchive)
 router.post('/upload', ctrlNews.Addnews)
 router.post('/userform', ctrlForms.sendClientForm)

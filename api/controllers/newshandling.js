@@ -32,6 +32,68 @@ module.exports.sendNews = function (req, res) {
 
 }
 
+module.exports.sendActiveNews = function (req, res) {
+
+    News.find({active: true}).sort({ date: -1}).exec(function (err, result) {
+        if (err) throw err
+        let results = JSON.stringify(result)
+        res.status(200)
+        res.json(results)
+    })
+}
+
+module.exports.updateNews = function (req, res) {
+
+    const newsData = req.body,
+        filter = { id: newsData.id },
+        updated = {
+            $set: {
+                active: newsData.active,
+            }
+        }
+        options = { upsert: true }
+
+    News.updateOne(filter,updated, options, err =>{
+        res.status(200);
+        if (err) {
+            console.log(err)
+            res.json({
+                'saved': false,
+                'message': err
+            });
+        } else {
+            res.json({
+                'saved': true,
+                'message': 'updated'
+            });
+        }
+    });
+};
+
+module.exports.deleteNews = function (req, res) {
+
+    const newsData = req.body,
+        filter = { id: newsData.id}
+
+    console.log(req.body)
+
+    News.deleteOne(filter, err =>{
+        res.status(200);
+        if (err) {
+            console.log(err)
+            res.json({
+                'saved': false,
+                'message': err
+            });
+        } else {
+            res.json({
+                'saved': true,
+                'message': 'deleted'
+            });
+        }
+    })
+}
+
 async function setId() {
 
     let id
@@ -81,6 +143,7 @@ function saveNews(newsData, id) {
     newNews.sign = newsData.sign
     newNews.rank = newsData.rank
     newNews.pics = pics
+    newNews.active = newsData.active
     newNews.save(err => {
         if (err) {
             console.log(err.message)
@@ -108,7 +171,8 @@ module.exports.Addnews = async function (req, res) {
                 title: newsData.title,
                 text: newsData.text,
                 sign: newsData.sign,
-                rank: newsData.rank
+                rank: newsData.rank,
+                active: newsData.active
             }
             let picCount = newsData.picCount
             let picId = '';
