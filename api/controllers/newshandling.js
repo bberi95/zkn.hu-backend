@@ -48,6 +48,40 @@ module.exports.updateNews = function (req, res) {
         filter = { id: newsData.id },
         updated = {
             $set: {
+                title: newsData.title,
+                date: newsData.date,
+                text: newsData.text,
+                sign: newsData.sign,
+                rank: newsData.rank,
+                pics: newsData.pics,
+                active: newsData.active,
+            }
+        }
+        options = { upsert: true }
+
+    News.updateOne(filter,updated, options, err =>{
+        res.status(200);
+        if (err) {
+            console.log(err)
+            res.json({
+                'saved': false,
+                'message': err
+            });
+        } else {
+            res.json({
+                'saved': true,
+                'message': 'updated'
+            });
+        }
+    });
+};
+
+module.exports.updateNewsActivity = function (req, res) {
+
+    const newsData = req.body,
+        filter = { id: newsData.id },
+        updated = {
+            $set: {
                 active: newsData.active,
             }
         }
