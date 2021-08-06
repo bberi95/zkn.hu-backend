@@ -7,23 +7,33 @@ const picPath = './client/assets/image/news/'
 var imageCount = 0
 var pics = []
 
+// module.exports.sendArchive = function (req, res) {
+
+//     let now = new Date()
+//     let year = now.getFullYear().toString()
+
+//     News.find({}).sort({ date: -1 }).exec(function (err, result) {
+//         if (err) throw err
+//         let results = JSON.stringify(result)
+//         res.status(200)
+//         res.json(results)
+//     })
+
+// }
+
 module.exports.sendArchive = function (req, res) {
 
-    let now = new Date()
-    let year = now.getFullYear().toString()
-
-    News.find({}).sort({ date: -1 }).exec(function (err, result) {
+    News.find({ archive: true, active: true}).sort({ date: -1 }).exec(function (err, result) {
         if (err) throw err
         let results = JSON.stringify(result)
         res.status(200)
         res.json(results)
     })
-
 }
 
 module.exports.sendNews = function (req, res) {
 
-    News.find({}).sort({ date: -1 }).exec(function (err, result) {
+    News.find({ archive: false }).sort({ date: -1 }).exec(function (err, result) {
         if (err) throw err
         let results = JSON.stringify(result)
         res.status(200)
@@ -33,8 +43,8 @@ module.exports.sendNews = function (req, res) {
 }
 
 module.exports.sendActiveNews = function (req, res) {
-
-    News.find({active: true}).sort({ date: -1}).exec(function (err, result) {
+    // ez nem akar itt működni active + archiveval, pedig kéne?
+    News.find({ active: true, archive: false}).sort({ date: -1 }).exec(function (err, result) {
         if (err) throw err
         let results = JSON.stringify(result)
         res.status(200)
@@ -55,11 +65,40 @@ module.exports.updateNews = function (req, res) {
                 rank: newsData.rank,
                 pics: newsData.pics,
                 active: newsData.active,
+                archive: newsData.archive,
             }
         }
-        options = { upsert: true }
+    options = { upsert: true }
 
-    News.updateOne(filter,updated, options, err =>{
+    News.updateOne(filter, updated, options, err => {
+        res.status(200);
+        if (err) {
+            console.log(err)
+            res.json({
+                'saved': false,
+                'message': err
+            });
+        } else {
+            res.json({
+                'saved': true,
+                'message': 'updated'
+            });
+        }
+    });
+};
+
+module.exports.archiveNews = function (req, res) {
+
+    const newsData = req.body,
+        filter = { id: newsData.id },
+        updated = {
+            $set: {
+                archive: newsData.archive,
+            }
+        }
+    options = { upsert: true }
+
+    News.updateOne(filter, updated, options, err => {
         res.status(200);
         if (err) {
             console.log(err)
@@ -85,9 +124,9 @@ module.exports.updateNewsActivity = function (req, res) {
                 active: newsData.active,
             }
         }
-        options = { upsert: true }
+    options = { upsert: true }
 
-    News.updateOne(filter,updated, options, err =>{
+    News.updateOne(filter, updated, options, err => {
         res.status(200);
         if (err) {
             console.log(err)
@@ -107,11 +146,11 @@ module.exports.updateNewsActivity = function (req, res) {
 module.exports.deleteNews = function (req, res) {
 
     const newsData = req.body,
-        filter = { id: newsData.id}
+        filter = { id: newsData.id }
 
     console.log(req.body)
 
-    News.deleteOne(filter, err =>{
+    News.deleteOne(filter, err => {
         res.status(200);
         if (err) {
             console.log(err)
@@ -178,6 +217,7 @@ function saveNews(newsData, id) {
     newNews.rank = newsData.rank
     newNews.pics = pics
     newNews.active = newsData.active
+    newNews.archive = false
     newNews.save(err => {
         if (err) {
             console.log(err.message)

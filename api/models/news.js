@@ -33,6 +33,10 @@ var newsSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   },
+  archive: {
+    type: Boolean,
+    require: true
+  }
 });
 
 mongoose.model('News', newsSchema);
