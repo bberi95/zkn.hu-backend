@@ -63,7 +63,8 @@ module.exports.updateNews = function (req, res) {
                 text: newsData.text,
                 sign: newsData.sign,
                 rank: newsData.rank,
-                pics: newsData.pics,
+                // pics: newsData.pics,
+                //ha ez a pics bent van akkor módosításkor null-t csinál az arrayből
                 active: newsData.active,
                 archive: newsData.archive,
             }
