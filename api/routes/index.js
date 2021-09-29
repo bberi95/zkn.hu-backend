@@ -19,7 +19,8 @@ const
     ctrlForms = require('../controllers/clientform'),
     ctrlStreets = require('../controllers/streethandling'),
     ctrlGarbages = require('../controllers/garbagehandling'),
-    ctrlRequests = require('../controllers/requestshandling')
+    ctrlRequests = require('../controllers/requestshandling'),
+    ctrlContact = require('../controllers/contactshandling')
 //const ctrlStream = require('../controllers/stream')
 
 
@@ -30,6 +31,13 @@ router.post('/update-news', ctrlNews.updateNews)
 router.post('/update-news-activity', ctrlNews.updateNewsActivity)
 router.post('/archive-news', ctrlNews.archiveNews)
 router.post('/delete-news', ctrlNews.deleteNews)
+
+// CONTACT:
+router.get('/contact', ctrlContact.sendContact)
+router.post('/save-contact', ctrlContact.saveContact)
+router.post('/delete-contact', ctrlContact.deleteContact)
+router.post('/update-contact', ctrlContact.updateContact)
+
 // router.post('/update-news', ctrlNews.updateNews)
 router.get('/archives', ctrlNews.sendArchive)
 router.post('/upload', ctrlNews.Addnews)
