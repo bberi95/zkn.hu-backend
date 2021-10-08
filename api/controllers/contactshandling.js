@@ -65,7 +65,8 @@ module.exports.updateContact = function (req, res) {
                 email: ContactData.email,
                 openHours: ContactData.openHours,
                 latitude: ContactData.latitude,
-                longitude: ContactData.longitude
+                longitude: ContactData.longitude,
+                active: ContactData.active
             }
         }
         options = { upsert: true }

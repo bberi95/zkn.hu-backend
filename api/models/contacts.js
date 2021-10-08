@@ -32,6 +32,10 @@ var contactSchema = new mongoose.Schema({
     longitude:{
         type: Number,
         required: true
+    },
+    active: {
+        type: Boolean,
+        required: true
     }
 });
 
