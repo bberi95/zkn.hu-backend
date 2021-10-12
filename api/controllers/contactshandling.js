@@ -61,7 +61,7 @@ module.exports.updateContact = function (req, res) {
                 name: ContactData.name,
                 address: ContactData.address,
                 phone: ContactData.phone,
-                mobile: ContactData.phone,
+                mobile: ContactData.mobile,
                 email: ContactData.email,
                 openHours: ContactData.openHours,
                 latitude: ContactData.latitude,
